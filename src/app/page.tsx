@@ -1,9 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <main className="">
-        Yogurtland Admin Portal
-      </main>
+      <h1>Welcome to the Yogurtland CMS!</h1>
     </div>
   );
 }

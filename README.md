@@ -4,4 +4,3 @@
 - Change the favicon and parent metadata title and description
 
 # pending
-login form 
