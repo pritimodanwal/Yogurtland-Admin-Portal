@@ -2,18 +2,32 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "sonner";
 import {
     Button,
     Menu,
     MenuItem,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export function Navbar() {
+    const router = useRouter();
     const [manageContentEl, setManageContentEl] = useState<null | HTMLElement>(null);
     const [rewardsEl, setRewardsEl] = useState<null | HTMLElement>(null);
     const [configurationsEl, setConfigurationsEl] = useState<null | HTMLElement>(null);
     const [recordsEl, setRecordsEl] = useState<null | HTMLElement>(null);
     
+    // handle logout function
+      const handleLogout = async () => {
+    try {
+      toast.success("Logged out successfully!");
+      router.push("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      toast.error("Failed to logout");
+    }
+  };
+
     return (
         <nav className="border-b border-zinc-200 light:border-zinc-800">
             <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -151,6 +165,7 @@ export function Navbar() {
                     variant="text"
                     id="id-logout"
                     sx={{ color: '#9C0752', textTransform: 'none', fontSize: '1rem' }}
+                    onClick={handleLogout}
                 >
                     Logout
                 </Button>

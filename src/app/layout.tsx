@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Navbar } from "../components/navbar";
+import { Providers } from "./provider";
 
 export const metadata: Metadata = {
   title: "YL Admin",
@@ -16,8 +17,10 @@ export default function RootLayout({ children }: {
       lang="en"
     >
       <body className="min-h-full flex flex-col">
-        <Navbar/>
-        {children}
+        <Providers>
+          <Navbar/>
+          {children}
+        </Providers>
         </body>
     </html>
   );
