@@ -6,4 +6,5 @@ export interface ManageContent {
     columns?: Column[];
     headerColumns?: Column[];
     filterColumns?: Column[];
+    newFieldColumns?: Column[];
 }

@@ -35,6 +35,7 @@ export function ManagementPageLayout({
     columns,
     filterColumns = [],
     headerColumns = [],
+    newFieldColumns = [],
     rows = [],
     addButtonLabel,
     addDialogContent,
@@ -124,13 +125,63 @@ export function ManagementPageLayout({
                         </Button>
                     ))}
 
-                    {/* Filter / Search fields in the same row */}
-                    {filterColumns.map((filter) => {
-                        const isUpdateBtn = filter.key === "updateButton" || filter.key === "update";
-                        if (isUpdateBtn) {
-                            return (
+                    {newFieldColumns.map((field) =>
+                        field.key === "uploadFile" ? (
+                            <Button
+                                key={field.key}
+                                variant="contained"
+                                startIcon={<AddIcon />}
+                                // onClick={() => handleAddClick(field)}
+                                sx={{
+                                    backgroundColor: "#9C0752",
+                                    "&:hover": { backgroundColor: "#7a0541" },
+                                    textTransform: "none",
+                                    fontWeight: 600,
+                                    px: 3,
+                                    py: 1.2,
+                                    borderRadius: 2,
+                                }}
+                            >
+                                {field.label}
+                            </Button>
+                        ) : null
+                    )}
+
+                    {filterColumns.map((filter) =>
+                        (filter.key === "search" || filter.key === "searchByNameID") ? (
+                            <Box key={filter.key} sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                                <TextField
+                                    placeholder="Search"
+                                    value={searchValues[filter.key] ?? ""}
+                                    onChange={(e) =>
+                                        setSearchValues((prev) => ({
+                                            ...prev,
+                                            [filter.key]: e.target.value,
+                                        }))
+                                    }
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") {
+                                            handleSearchSubmit();
+                                        }
+                                    }}
+                                    size="small"
+                                    sx={{ width: 220 }}
+                                    slotProps={{
+                                        input: {
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <SearchIcon
+                                                        sx={{
+                                                            color: "#9b9b9b",
+                                                            fontSize: 18,
+                                                        }}
+                                                    />
+                                                </InputAdornment>
+                                            ),
+                                        },
+                                    }}
+                                />
                                 <Button
-                                    key={filter.key}
                                     variant="contained"
                                     size="small"
                                     onClick={handleSearchSubmit}
@@ -146,52 +197,60 @@ export function ManagementPageLayout({
                                         borderRadius: 1,
                                     }}
                                 >
-                                    {filter.label}
+                                    Submit
                                 </Button>
-                            );
-                        }
-                        return (
-                            <TextField
-                                key={filter.key}
-                                placeholder={filter.key === "search" ? `Search ${title.toLowerCase()}...` : filter.label}
-                                value={searchValues[filter.key] ?? ""}
-                                onChange={(e) => setSearchValues(prev => ({ ...prev, [filter.key]: e.target.value }))}
-                                onKeyDown={(e) => { if (e.key === "Enter") handleSearchSubmit(); }}
-                                size="small"
-                                sx={{ width: filter.key === "search" ? 220 : 160 }}
-                                slotProps={{
-                                    input: {
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <SearchIcon sx={{ color: "#9b9b9b", fontSize: 18 }} />
-                                            </InputAdornment>
-                                        ),
-                                    },
-                                }}
-                            />
-                        );
-                    })}
-                    {/* Filter searchbar Submit button */}
-                    {filterColumns.length > 0 && 
-                        <Button
-                            variant="contained"
-                            size="small"
-                            onClick={handleSearchSubmit}
-                            sx={{
-                                backgroundColor: "#9C0752",
-                                "&:hover": { backgroundColor: "#7a0541" },
-                                textTransform: "none",
-                                fontWeight: 600,
-                                fontSize: "0.8rem",
-                                px: 2,
-                                py: 0.25,
-                                minHeight: 32,
-                                borderRadius: 1,
-                            }}
-                        >
-                            Submit
-                        </Button>
-                    }
+                            </Box>
+                        ) : (filter.key === "startDate") ? (
+                            <Box key={filter.key} sx={{ display: "flex", gap: 1, alignItems: "center", flexWrap: "wrap" }}>
+                                <TextField
+                                    label="Start Date"
+                                    type="date"
+                                    value={searchValues.startDate ?? ""}
+                                    onChange={(e) =>
+                                        setSearchValues((prev) => ({
+                                            ...prev,
+                                            startDate: e.target.value,
+                                        }))
+                                    }
+                                    size="small"
+                                    sx={{ width: 180 }}
+                                    slotProps={{ inputLabel: { shrink: true } }}
+                                />
+                                <TextField
+                                    label="End Date"
+                                    type="date"
+                                    value={searchValues.endDate ?? ""}
+                                    onChange={(e) =>
+                                        setSearchValues((prev) => ({
+                                            ...prev,
+                                            endDate: e.target.value,
+                                        }))
+                                    }
+                                    size="small"
+                                    sx={{ width: 180 }}
+                                    slotProps={{ inputLabel: { shrink: true } }}
+                                />
+                                <Button
+                                    variant="contained"
+                                    size="small"
+                                    onClick={handleSearchSubmit}
+                                    sx={{
+                                        backgroundColor: "#9C0752",
+                                        "&:hover": { backgroundColor: "#7a0541" },
+                                        textTransform: "none",
+                                        fontWeight: 600,
+                                        fontSize: "0.8rem",
+                                        px: 2,
+                                        py: 0.25,
+                                        minHeight: 32,
+                                        borderRadius: 1,
+                                    }}
+                                >
+                                    Submit
+                                </Button>
+                            </Box>
+                        ) : null
+                    )}
                 </Box>
             </Box>
 
@@ -215,7 +274,7 @@ export function ManagementPageLayout({
                                         {col.label}
                                     </TableCell>
                                 ))}
-                                {showActions && (
+                                {/* {showActions && (
                                     <TableCell
                                         align="right"
                                         sx={{
@@ -228,7 +287,7 @@ export function ManagementPageLayout({
                                     >
                                         -
                                     </TableCell>
-                                )}
+                                )} */}
                             </TableRow>
                         </TableHead>
                         <TableBody>

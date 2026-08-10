@@ -6,6 +6,7 @@ export interface ManagementPageLayoutProps {
     columns: Column[];
     headerColumns?: Column[];
     filterColumns?: Column[];
+    newFieldColumns?: Column[];
     rows?: Record<string, string | number>[];
     addButtonLabel?: string;
     addDialogContent?: React.ReactNode;

@@ -159,8 +159,8 @@ const contentConfig: Record<string, ManageContent> = {
         addButtonLabel: "Add Job",
         headerColumns: [
             { key: 'create', label: "Create" }, 
-            { key: 'archived-career', label: "Archived Career Posts" }, 
-            { key: 'template', label: "Template" }, 
+            { key: 'archived-career', label: "Archived Careers" }, 
+            { key: 'templates', label: "Templates" }, 
         ],
         filterColumns: [
             { key: 'search', label: "Search" }, 
@@ -210,11 +210,14 @@ const contentConfig: Record<string, ManageContent> = {
             { key: 'search', label: "Search" }, 
         ],
         columns: [
-            { key: "lable", label: "File Name" },
-            { key: "url", label: "Type" },
-            { key: "date", label: "Size" },
+            { key: "label", label: "Label" },
+            { key: "url", label: "URL" },
+            { key: "date", label: "Date" },
             { key: "actions", label: "" },
         ],
+        newFieldColumns: [
+            { key: "uploadFile", label: "Upload Your Files" },
+        ]
     },
     "mobile-tiles": {
         title: "Mobile Tiles",
@@ -222,7 +225,6 @@ const contentConfig: Record<string, ManageContent> = {
         addButtonLabel: "Add Tile",
         headerColumns: [
             { key: 'create', label: "Create" }, 
-            { key: 'archived-pages', label: "Archived Pages" }, 
         ],
         columns: [
             { key: "name", label: "Name" },
@@ -237,11 +239,11 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage fundraiser campaigns.",
         addButtonLabel: "Add Fundraiser",
         headerColumns: [
-            { key: 'maskBlockdate', label: "Create" }, 
+            { key: 'massBlockdates', label: "Mass Block Dates" }, 
         ],
         filterColumns: [    
-            { key: 'startDateFilter', label: "Start" }, 
-            { key: 'endDateFilter', label: "End" },
+            { key: 'startDate', label: "Start" }, 
+            { key: 'endDate', label: "End" },
             { key: 'updateButton', label: "Update" }
         ],
         columns: [
@@ -278,6 +280,7 @@ export default function ManageContentPage({ params }: Props) {
             columns={config.columns || []}
             filterColumns={config.filterColumns || []}
             headerColumns={config.headerColumns || []}
+            newFieldColumns={config.newFieldColumns || []}
             rows={[]}
         />
     );
