@@ -9,7 +9,7 @@ export default function AdminUsersPage() {
             description="Manage admin user accounts and permissions."
             addButtonLabel="Add Admin User"
             headerColumns={[{ key: "create", label: "Create" }]}
-            filterColumns={[{ key: "filterByType", label: "Filter By Type" }, { key: "search", label: "Search" }]}
+            filterColumns={[{ key: "dropDown", label: "Filter By Type" }, { key: "search", label: "Search" }]}
             columns={[
                 { key: "name", label: "Name" },
                 { key: "email", label: "Email" },

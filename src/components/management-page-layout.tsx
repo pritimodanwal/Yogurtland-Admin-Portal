@@ -5,12 +5,15 @@ import { ManagementPageLayoutProps } from "../types/management-page";
 import {
     Box,
     Button,
+    Checkbox,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
+    FormControlLabel,
     IconButton,
     InputAdornment,
+    MenuItem,
     Paper,
     Table,
     TableBody,
@@ -72,16 +75,6 @@ export function ManagementPageLayout({
         // setDeleteDialogOpen(true);
     };
 
-    // const handleDeleteConfirm = () => {
-    //     if (onDelete && selectedRow) {
-    //         onDelete(selectedRow);
-    //     } else {
-    //         toast.success("Item deleted successfully");
-    //     }
-    //     setDeleteDialogOpen(false);
-    //     setSelectedRow(null);
-    // };
-
     const handleEditClick = (row: Record<string, string | number>) => {
         if (onEdit) {
             onEdit(row);
@@ -93,7 +86,7 @@ export function ManagementPageLayout({
     return (
         <Box sx={{ p: 4, maxWidth: "100%" }}>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2, flexWrap: "wrap", gap: 1 }}>
-                <Typography variant="h5" sx={{ fontWeight: 700, color: "#1a1a1a" }}>
+                <Typography variant="h5" sx={{ fontWeight: 700, color: "#1a1a1a", mb: 2 }}>
                     {title}
                 </Typography>
                 {/* Header Action Buttons */}
@@ -144,7 +137,26 @@ export function ManagementPageLayout({
                             >
                                 {field.label}
                             </Button>
+                        ) : field.key === "checkBox" ? (
+                            <FormControlLabel
+                                key={field.key}
+                                control={
+                                    <Checkbox
+                                        size="small"
+                                        checked={searchValues[field.key] === "true"}
+                                        onChange={(e) =>
+                                            setSearchValues((prev) => ({
+                                                ...prev,
+                                                [field.key]: e.target.checked ? "true" : "false",
+                                            }))
+                                        }
+                                        sx={{ color: "#9C0752", '&.Mui-checked': { color: '#9C0752' } }}
+                                    />
+                                }
+                                label={field.label || "Enable"}
+                            />
                         ) : null
+
                     )}
 
                     {filterColumns.map((filter) =>
@@ -201,39 +213,85 @@ export function ManagementPageLayout({
                                 </Button>
                             </Box>
                         ) : (filter.key === "startDate") ? (
-                            <Box key={filter.key} sx={{ display: "flex", gap: 1, alignItems: "center", flexWrap: "wrap" }}>
-                                <TextField
-                                    label="Start Date"
-                                    type="date"
-                                    value={searchValues.startDate ?? ""}
-                                    onChange={(e) =>
-                                        setSearchValues((prev) => ({
-                                            ...prev,
-                                            startDate: e.target.value,
-                                        }))
-                                    }
-                                    size="small"
-                                    sx={{ width: 180 }}
-                                    slotProps={{ inputLabel: { shrink: true } }}
-                                />
-                                <TextField
-                                    label="End Date"
-                                    type="date"
-                                    value={searchValues.endDate ?? ""}
-                                    onChange={(e) =>
-                                        setSearchValues((prev) => ({
-                                            ...prev,
-                                            endDate: e.target.value,
-                                        }))
-                                    }
-                                    size="small"
-                                    sx={{ width: 180 }}
-                                    slotProps={{ inputLabel: { shrink: true } }}
-                                />
+                            <>
+                                <Box key={filter.key} sx={{ display: "flex", gap: 1, alignItems: "center", flexWrap: "wrap" }}>
+                                    <TextField
+                                        label="Start Date"
+                                        type="date"
+                                        value={searchValues.startDate ?? ""}
+                                        onChange={(e) =>
+                                            setSearchValues((prev) => ({
+                                                ...prev,
+                                                startDate: e.target.value,
+                                            }))
+                                        }
+                                        size="small"
+                                        sx={{ width: 180 }}
+                                        slotProps={{ inputLabel: { shrink: true } }}
+                                    />
+                                    <TextField
+                                        label="End Date"
+                                        type="date"
+                                        value={searchValues.endDate ?? ""}
+                                        onChange={(e) =>
+                                            setSearchValues((prev) => ({
+                                                ...prev,
+                                                endDate: e.target.value,
+                                            }))
+                                        }
+                                        size="small"
+                                        sx={{ width: 180 }}
+                                        slotProps={{ inputLabel: { shrink: true } }}
+                                    />
+                                    <Button
+                                        variant="contained"
+                                        size="small"
+                                        onClick={handleSearchSubmit}
+                                        sx={{
+                                            backgroundColor: "#9C0752",
+                                            "&:hover": { backgroundColor: "#7a0541" },
+                                            textTransform: "none",
+                                            fontWeight: 600,
+                                            fontSize: "0.8rem",
+                                            px: 2,
+                                            py: 0.25,
+                                            minHeight: 32,
+                                            borderRadius: 1,
+                                        }}
+                                    >
+                                        Apply Date Filter
+                                    </Button>
+                                </Box>
+                                {/* <Box key={`${filter.key}-line-break`} sx={{ flexBasis: "100%", height: 0 }} /> */}
+                            </>
+                        ) : (filter.key === "dropDown") ? (
+                            <TextField
+                                key={filter.key}
+                                select
+                                label={filter.label || "Status"}
+                                value={searchValues[filter.key] ?? ""}
+                                onChange={(e) =>
+                                    setSearchValues((prev) => ({
+                                        ...prev,
+                                        [filter.key]: e.target.value,
+                                    }))
+                                }
+                                size="small"
+                                sx={{ minWidth: 200 }}
+                            >
+                                <MenuItem value="">All</MenuItem>
+                                <MenuItem value="pending">Submitted By Customers</MenuItem>
+                                <MenuItem value="approved">FTPed to Yogurtland</MenuItem>
+                                <MenuItem value="rejected">Successfully Processed</MenuItem>
+                                <MenuItem value="rejected">Failed to Submit to Paytronix</MenuItem>
+                                <MenuItem value="rejected">Bad Data from Process File</MenuItem>
+                            </TextField>
+                        )
+                            : (filter.key === 'clearFilter') ? (
                                 <Button
                                     variant="contained"
                                     size="small"
-                                    onClick={handleSearchSubmit}
+                                    // onClick={handleSearchSubmit}
                                     sx={{
                                         backgroundColor: "#9C0752",
                                         "&:hover": { backgroundColor: "#7a0541" },
@@ -246,160 +304,146 @@ export function ManagementPageLayout({
                                         borderRadius: 1,
                                     }}
                                 >
-                                    Submit
+                                    Clear Filters
                                 </Button>
-                            </Box>
-                        ) : null
+                            )
+                                : (filter.key === 'export') ? (
+                                    <Button
+                                        variant="contained"
+                                        size="small"
+                                        // onClick={handleSearchSubmit}
+                                        sx={{
+                                            backgroundColor: "#9C0752",
+                                            "&:hover": { backgroundColor: "#7a0541" },
+                                            textTransform: "none",
+                                            fontWeight: 600,
+                                            fontSize: "0.8rem",
+                                            px: 2,
+                                            py: 0.25,
+                                            minHeight: 32,
+                                            borderRadius: 1,
+                                        }}
+                                    >
+                                        Export
+                                    </Button>
+                                ) : null
                     )}
                 </Box>
             </Box>
 
             {/* Table */}
             <Paper elevation={0} sx={{ border: "1px solid #e5e7eb", borderRadius: 2, overflow: "hidden" }}>
-                <TableContainer>
-                    <Table stickyHeader>
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((col) => (
-                                    <TableCell
-                                        key={col.key}
-                                        sx={{
-                                            fontWeight: 700,
-                                            backgroundColor: "#f9fafb",
-                                            color: "#374151",
-                                            borderBottom: "2px solid #e5e7eb",
-                                            width: col.width,
-                                        }}
-                                    >
-                                        {col.label}
-                                    </TableCell>
-                                ))}
-                                {/* {showActions && (
-                                    <TableCell
-                                        align="right"
-                                        sx={{
-                                            fontWeight: 700,
-                                            backgroundColor: "#f9fafb",
-                                            color: "#374151",
-                                            borderBottom: "2px solid #e5e7eb",
-                                            width: 120,
-                                        }}
-                                    >
-                                        -
-                                    </TableCell>
-                                )} */}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {paginatedRows.length === 0 ? (
-                                <TableRow>
-                                    <TableCell
-                                        colSpan={columns.length + (showActions ? 1 : 0)}
-                                        align="center"
-                                        sx={{ py: 8, color: "#9ca3af" }}
-                                    >
-                                        <Typography variant="body1">
-                                            No {title.toLowerCase()} found.
-                                        </Typography>
-                                    </TableCell>
-                                </TableRow>
-                            ) : (
-                                paginatedRows.map((row, i) => (
-                                    <TableRow
-                                        key={i}
-                                        hover
-                                        sx={{ "&:last-child td": { borderBottom: 0 } }}
-                                    >
+                        <TableContainer>
+                            <Table stickyHeader>
+                                <TableHead>
+                                    <TableRow>
                                         {columns.map((col) => (
-                                            <TableCell key={col.key} sx={{ color: "#374151" }}>
-                                                {row[col.key] ?? "—"}
+                                            <TableCell
+                                                key={col.key}
+                                                sx={{
+                                                    fontWeight: 700,
+                                                    backgroundColor: "#f9fafb",
+                                                    color: "#374151",
+                                                    borderBottom: "2px solid #e5e7eb",
+                                                    width: col.width,
+                                                }}
+                                            >
+                                                {col.label}
                                             </TableCell>
                                         ))}
-                                        {showActions && (
-                                            <TableCell align="right">
-                                                <Tooltip title="Edit">
-                                                    <IconButton
-                                                        size="small"
-                                                        onClick={() => handleEditClick(row)}
-                                                        sx={{ color: "#9C0752", mr: 0.5 }}
-                                                    >
-                                                        <EditIcon fontSize="small" />
-                                                    </IconButton>
-                                                </Tooltip>
-                                                <Tooltip title="Delete">
-                                                    <IconButton
-                                                        size="small"
-                                                        onClick={() => handleDeleteClick(row)}
-                                                        sx={{ color: "#dc2626" }}
-                                                    >
-                                                        <DeleteIcon fontSize="small" />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            </TableCell>
-                                        )}
                                     </TableRow>
-                                ))
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    component="div"
-                    count={filteredRows.length}
-                    page={page}
-                    rowsPerPage={rowsPerPage}
-                    onPageChange={(_, newPage) => setPage(newPage)}
-                    onRowsPerPageChange={(e) => { setRowsPerPage(parseInt(e.target.value, 10)); setPage(0); }}
-                    rowsPerPageOptions={[10, 25, 50]}
-                    sx={{ borderTop: "1px solid #e5e7eb" }}
-                />
+                                </TableHead>
+
+                                <TableBody>
+                                    {paginatedRows.length === 0 ? (
+                                        <TableRow>
+                                            <TableCell
+                                                colSpan={columns.length + (showActions ? 1 : 0)}
+                                                align="center"
+                                                sx={{
+                                                    py: 8,
+                                                    color: "#9ca3af",
+                                                }}
+                                            >
+                                                <Typography variant="body1">
+                                                    No {title.toLowerCase()} found.
+                                                </Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    ) : (
+                                        paginatedRows.map((row, i) => (
+                                            <TableRow
+                                                key={i}
+                                                hover
+                                                sx={{
+                                                    "&:last-child td": {
+                                                        borderBottom: 0,
+                                                    },
+                                                }}
+                                            >
+                                                {columns.map((col) => (
+                                                    <TableCell
+                                                        key={col.key}
+                                                        sx={{ color: "#374151" }}
+                                                    >
+                                                        {row[col.key] ?? "—"}
+                                                    </TableCell>
+                                                ))}
+
+                                                {showActions && (
+                                                    <TableCell align="right">
+                                                        <Tooltip title="Edit">
+                                                            <IconButton
+                                                                size="small"
+                                                                onClick={() =>
+                                                                    handleEditClick(row)
+                                                                }
+                                                                sx={{
+                                                                    color: "#9C0752",
+                                                                    mr: 0.5,
+                                                                }}
+                                                            >
+                                                                <EditIcon fontSize="small" />
+                                                            </IconButton>
+                                                        </Tooltip>
+
+                                                        <Tooltip title="Delete">
+                                                            <IconButton
+                                                                size="small"
+                                                                onClick={() =>
+                                                                    handleDeleteClick(row)
+                                                                }
+                                                                sx={{
+                                                                    color: "#dc2626",
+                                                                }}
+                                                            >
+                                                                <DeleteIcon fontSize="small" />
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </TableCell>
+                                                )}
+                                            </TableRow>
+                                        ))
+                                    )}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <TablePagination
+                            component="div"
+                            count={filteredRows.length}
+                            page={page}
+                            rowsPerPage={rowsPerPage}
+                            onPageChange={(_, newPage) => setPage(newPage)}
+                            onRowsPerPageChange={(e) => {
+                                setRowsPerPage(parseInt(e.target.value, 10));
+                                setPage(0);
+                            }}
+                            rowsPerPageOptions={[10, 25, 50]}
+                            sx={{
+                                borderTop: "1px solid #e5e7eb",
+                            }}
+                        />
             </Paper>
-
-            {/* Add Dialog */}
-            {/* <Dialog open={addDialogOpen} onClose={() => setAddDialogOpen(false)} maxWidth="sm" fullWidth>
-                <DialogTitle sx={{ fontWeight: 700, color: "#1a1a1a" }}>
-                    {addButtonLabel ?? `Add ${title.replace(/s$/, "")}`}
-                </DialogTitle>
-                <DialogContent dividers>
-                    {addDialogContent ?? (
-                        <Typography variant="body2" color="text.secondary">
-                            Form fields for {title} will appear here.
-                        </Typography>
-                    )}
-                </DialogContent>
-                <DialogActions sx={{ px: 3, py: 2 }}>
-                    <Button onClick={() => setAddDialogOpen(false)} sx={{ color: "#6b7280", textTransform: "none" }}>
-                        Cancel
-                    </Button>
-                    <Button
-                        variant="contained"
-                        onClick={() => { toast.success("Added successfully!"); setAddDialogOpen(false); }}
-                        sx={{ backgroundColor: "#9C0752", "&:hover": { backgroundColor: "#7a0541" }, textTransform: "none" }}
-                    >
-                        Save
-                    </Button>
-                </DialogActions>
-            </Dialog> */}
-
-            {/* Delete Confirm Dialog */}
-            {/* <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)} maxWidth="xs" fullWidth>
-                <DialogTitle sx={{ fontWeight: 700 }}>Confirm Delete</DialogTitle>
-                <DialogContent>
-                    <Typography>Are you sure you want to delete this item? This action cannot be undone.</Typography>
-                </DialogContent>
-                <DialogActions sx={{ px: 3, py: 2 }}>
-                    <Button onClick={() => setDeleteDialogOpen(false)} sx={{ color: "#6b7280", textTransform: "none" }}>
-                        Cancel
-                    </Button>
-                    <Button
-                        variant="contained"
-                        onClick={handleDeleteConfirm}
-                        sx={{ backgroundColor: "#dc2626", "&:hover": { backgroundColor: "#b91c1c" }, textTransform: "none" }}
-                    >
-                        Delete
-                    </Button>
-                </DialogActions>
-            </Dialog> */}
         </Box>
     );
 }

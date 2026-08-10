@@ -32,7 +32,7 @@ const configMap: Record<string, ConfigPageConfig> = {
             { key: "actions", label: "" }
         ],
     },
-    departments: {
+    "departments": {
         title: "Departments",
         description: "Manage company departments.",
         addButtonLabel: "Add Department",
@@ -115,7 +115,10 @@ const configMap: Record<string, ConfigPageConfig> = {
     "location-promo-url": {
         title: "Location Promo URL",
         description: "Manage promotional URLs for locations.",
-        addButtonLabel: "Add Promo URL"
+        addButtonLabel: "Add Promo URL",
+        newFieldColumns: [
+            { key: "promo-value", label: "Value" },
+        ],
     },
     "scheduled-location-text": {
         title: "Scheduled Location Text",
@@ -144,6 +147,7 @@ export default function ConfigurationPage({ params }: Props) {
             columns={config.columns || []} 
             filterColumns={config.filterColumns || []}
             headerColumns={config.headerColumns || []}
+            newFieldColumns={config.newFieldColumns || []}
             rows={[]}
         />
     );

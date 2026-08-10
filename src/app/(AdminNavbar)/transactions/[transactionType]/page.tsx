@@ -14,7 +14,7 @@ const transactionConfig: Record<string, TransactionConfig> = {
             { key: "allDate", label: "AllDate" },
             { key: "startDate", label: "Start Date" },
             { key: "endDate", label: "End Date" },
-            { key: "status", label: "Status" },
+            { key: "dropDown", label: "Status" },
             { key: "search", label: "Search" },
             { key: "clearFilter", label: "Clear Filter" },
             { key: "export", label: "Export" },

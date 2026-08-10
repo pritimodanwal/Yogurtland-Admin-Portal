@@ -233,9 +233,12 @@ const contentConfig: Record<string, ManageContent> = {
             { key: "endDate", label: "End Date" },
             { key: "actions", label: "" },
         ],
+        newFieldColumns: [
+            { key: "checkBox", label: "Include current Promotion as first tile" },
+        ]
     },
     fundraisers: {
-        title: "Fundraisers",
+        title: "Leaderboard Fundraisers",
         description: "Manage fundraiser campaigns.",
         addButtonLabel: "Add Fundraiser",
         headerColumns: [
