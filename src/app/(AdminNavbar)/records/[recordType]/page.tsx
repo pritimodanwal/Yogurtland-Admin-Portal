@@ -17,7 +17,19 @@ const recordsMap: Record<string, RecordConfig> = {
         ],
         filterColumns:[ 
             { key: 'showArchived', label: "Show Archived" },
-            { key: 'dropDown', label: "Filter By Department" },
+            {
+                key: 'dropDown', label: 'Filter By Department', options: [
+                    { value: 'careers', label: 'Careers' },
+                    { value: 'feedback', label: 'Feedback' },
+                    { value: 'giftCard', label: 'Gift Card' },
+                    { value: 'info', label: 'Info' },
+                    { value: 'marketing', label: 'Marketing' },
+                    { value: 'media', label: 'Media' },
+                    { value: 'mobile', label: 'Mobile' },
+                    { value: 'realRewards', label: 'Real Rewards' },
+                    { value: 'store', label: 'Store' },
+                ]
+            },
             { key: 'startDate', label: "Start Date" },
             { key: 'endDate', label: "End Date" },
             { key: 'export', label: "Export" },
@@ -62,7 +74,7 @@ const recordsMap: Record<string, RecordConfig> = {
         addButtonLabel: "Export",
         showActions: false,
         filterColumns:[
-            {key: "dropDown", label: "Filter By Location"},
+            { key: 'dropDown', label: 'Location', options: [] },
             {key: "startDate", label: "Start Date"},
             {key: "endDate", label: "End Date"},
             {key: "search", label: "Search By User"},

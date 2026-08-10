@@ -14,7 +14,15 @@ const transactionConfig: Record<string, TransactionConfig> = {
             { key: "allDate", label: "AllDate" },
             { key: "startDate", label: "Start Date" },
             { key: "endDate", label: "End Date" },
-            { key: "dropDown", label: "Status" },
+            {
+                key: "dropDown", label: "Status", options: [
+                    { value: "pending", label: "Submitted By Customers" },
+                    { value: "ftped", label: "FTPed to Yogurtland" },
+                    { value: "processed", label: "Successfully Processed" },
+                    { value: "failed", label: "Failed to Submit to Paytronix" },
+                    { value: "bad_data", label: "Bad Data from Process File" },
+                ]
+            },
             { key: "search", label: "Search" },
             { key: "clearFilter", label: "Clear Filter" },
             { key: "export", label: "Export" },

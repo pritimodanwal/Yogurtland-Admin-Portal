@@ -279,12 +279,11 @@ export function ManagementPageLayout({
                                 size="small"
                                 sx={{ minWidth: 200 }}
                             >
-                                <MenuItem value="">All</MenuItem>
-                                <MenuItem value="pending">Submitted By Customers</MenuItem>
-                                <MenuItem value="approved">FTPed to Yogurtland</MenuItem>
-                                <MenuItem value="rejected">Successfully Processed</MenuItem>
-                                <MenuItem value="rejected">Failed to Submit to Paytronix</MenuItem>
-                                <MenuItem value="rejected">Bad Data from Process File</MenuItem>
+                                {filter.options?.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
                             </TextField>
                         )
                             : (filter.key === 'clearFilter') ? (
