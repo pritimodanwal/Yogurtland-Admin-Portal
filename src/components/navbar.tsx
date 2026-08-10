@@ -16,9 +16,9 @@ export function Navbar() {
     const [rewardsEl, setRewardsEl] = useState<null | HTMLElement>(null);
     const [configurationsEl, setConfigurationsEl] = useState<null | HTMLElement>(null);
     const [recordsEl, setRecordsEl] = useState<null | HTMLElement>(null);
-    
-    // handle logout function
-      const handleLogout = async () => {
+
+  // handle logout function
+   const handleLogout = async () => {
     try {
       toast.success("Logged out successfully!");
       router.push("/login");

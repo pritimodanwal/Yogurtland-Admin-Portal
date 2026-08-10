@@ -9,31 +9,28 @@ import {
     Button,
     Typography,
     InputAdornment,
-    IconButton,
     Divider,
     Link,
 } from "@mui/material";
 import {
     Email as EmailIcon,
-    Lock as LockIcon,
-    Visibility,
-    VisibilityOff,
+  
 } from "@mui/icons-material";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
-export default function Login() {
-    const [showPassword, setShowPassword] = useState(false);
+
+export default function ForgotPassword() {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
     };
 
-    const handleLogin = async () => {
-        toast.success("Logged in successfully!");
-        redirect("/");
+
+    const handleForgotPassword = async () => {
+        toast.success("Password reset link sent successfully!");
+        redirect("/login");
     }
     return (
         <Box
@@ -62,7 +59,7 @@ export default function Login() {
                             textAlign: "center",
                         }}
                     >
-                        Welcome to Admin Login Page
+                        Forgot Your Password?
                     </Typography>
                 </Box>
 
@@ -109,47 +106,6 @@ export default function Login() {
                                 }}
                             />
 
-                            <TextField
-                                fullWidth
-                                label="Password"
-                                type={showPassword ? "text" : "password"}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                variant="outlined"
-                                size="medium"
-                                sx={{ mb: 1 }}
-                                slotProps={{
-                                    input: {
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <LockIcon sx={{ color: "#9C0752" }} />
-                                            </InputAdornment>
-                                        ),
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    onClick={() => setShowPassword(!showPassword)}
-                                                    edge="end"
-                                                    size="small"
-                                                >
-                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    },
-                                }}
-                            />
-
-                             <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 3 }}>
-                                <Link
-                                    href="/forgot_password"
-                                    underline="hover"
-                                    sx={{ fontSize: "0.8rem", color: "#9C0752", fontWeight: 500 }}
-                                >
-                                    Forgot your password?
-                                </Link>
-                            </Box>
-
                             <Button
                                 type="submit"
                                 fullWidth
@@ -170,9 +126,9 @@ export default function Login() {
                                         boxShadow: "0 6px 24px rgba(156,7,82,0.5)",
                                     },
                                 }}
-                                onClick={handleLogin}
+                                onClick={handleForgotPassword}
                             >
-                                Sign In
+                                Submit
                             </Button>
                         </form>
 
@@ -183,15 +139,7 @@ export default function Login() {
                                 variant="body2"
                                 sx={{ color: "#aaa", fontSize: "0.85rem" }}
                             >
-                                If you have not created your password, please do so using the link sent from marketingdept@yogurtland.com. If you have not received this email, please check your Junk/Spam email folder. If you are unable to locate the email or have further questions, contact{" "}
-                                  <Link
-                                    href="mailto:marketingdept@yogurtland.com"
-                                    underline="hover"
-                                    sx={{ color: "#9C0752", fontWeight: 600 }}
-                                >
-                                marketingdept@yogurtland.com
-                                </Link>
-                                {" "}for support. Thank you!
+                               Please enter the email address associated with your Website Admin Panel account. We will send you an email to this address with a link to update your password.
                             </Typography>
                         </Box>
                     </CardContent>
