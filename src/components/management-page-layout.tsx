@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import {ManagementPageLayoutProps} from "../types/management-page";
+import { ManagementPageLayoutProps } from "../types/management-page";
 import {
     Box,
     Button,
@@ -29,13 +29,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { toast } from "sonner";
 
-
 export function ManagementPageLayout({
     title,
     description,
     columns,
-    filterColumns,
-    headerColumns,
+    filterColumns = [],
+    headerColumns = [],
     rows = [],
     addButtonLabel,
     addDialogContent,
@@ -44,43 +43,43 @@ export function ManagementPageLayout({
     onDelete,
     showActions = true,
 }: ManagementPageLayoutProps) {
-    const [search, setSearch] = useState("");
+    const [searchValues, setSearchValues] = useState<Record<string, string>>({});
+    const [submittedSearch, setSubmittedSearch] = useState<Record<string, string>>({});
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [addDialogOpen, setAddDialogOpen] = useState(false);
-    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    // const [addDialogOpen, setAddDialogOpen] = useState(false);
+    // const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [selectedRow, setSelectedRow] = useState<Record<string, string | number> | null>(null);
 
-    const filteredRows = rows.filter((row) =>
-        Object.values(row).some((val) =>
-            String(val).toLowerCase().includes(search.toLowerCase())
-        )
-    );
+    const handleSearchSubmit = () => {
+        setSubmittedSearch(searchValues);
+        setPage(0);
+    };
+
+    const filteredRows = rows.filter((row) => {
+        return Object.entries(submittedSearch).every(([key, value]) => {
+            if (!value) return true;
+            const cellValue = String(row[key] ?? "").toLowerCase();
+            return cellValue.includes(value.toLowerCase());
+        });
+    });
 
     const paginatedRows = filteredRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
-    const handleAddClick = () => {
-        if (onAdd) {
-            onAdd();
-        } else {
-            setAddDialogOpen(true);
-        }
-    };
-
     const handleDeleteClick = (row: Record<string, string | number>) => {
         setSelectedRow(row);
-        setDeleteDialogOpen(true);
+        // setDeleteDialogOpen(true);
     };
 
-    const handleDeleteConfirm = () => {
-        if (onDelete && selectedRow) {
-            onDelete(selectedRow);
-        } else {
-            toast.success("Item deleted successfully");
-        }
-        setDeleteDialogOpen(false);
-        setSelectedRow(null);
-    };
+    // const handleDeleteConfirm = () => {
+    //     if (onDelete && selectedRow) {
+    //         onDelete(selectedRow);
+    //     } else {
+    //         toast.success("Item deleted successfully");
+    //     }
+    //     setDeleteDialogOpen(false);
+    //     setSelectedRow(null);
+    // };
 
     const handleEditClick = (row: Record<string, string | number>) => {
         if (onEdit) {
@@ -92,49 +91,108 @@ export function ManagementPageLayout({
 
     return (
         <Box sx={{ p: 4, maxWidth: "100%" }}>
-            {/* Header */}
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 3 }}>
-                <Box>
-                    <Typography variant="h4" sx={{ fontWeight: 700, color: "#1a1a1a", mb: 0.5 }}>
-                        {title}
-                    </Typography>
-                </Box>
-                {/* <Button
-                    variant="contained"
-                    startIcon={<AddIcon />}
-                    onClick={handleAddClick}
-                    sx={{
-                        backgroundColor: "#9C0752",
-                        "&:hover": { backgroundColor: "#7a0541" },
-                        textTransform: "none",
-                        fontWeight: 600,
-                        px: 3,
-                        py: 1.2,
-                        borderRadius: 2,
-                    }}
-                >
-                    {addButtonLabel ?? `Add ${title.replace(/s$/, "")}`}
-                </Button> */}
-            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2, flexWrap: "wrap", gap: 1 }}>
+                <Typography variant="h5" sx={{ fontWeight: 700, color: "#1a1a1a" }}>
+                    {title}
+                </Typography>
+                {/* Header Action Buttons */}
+                <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", alignItems: "center" }}>
+                    {headerColumns.map((btn) => (
+                        <Button
+                            key={btn.key}
+                            variant={"outlined"}
+                            // onClick={}
+                            size="small"
+                            sx={{
+                                backgroundColor: "transparent",
+                                borderColor: "#9C0752",
+                                color: "#9C0752",
+                                "&:hover": {
+                                    backgroundColor: "rgba(156, 7, 82, 0.04)",
+                                    borderColor: "#7a0541",
+                                },
+                                textTransform: "none",
+                                fontWeight: 600,
+                                fontSize: "0.8rem",
+                                px: 1.5,
+                                py: 0.25,
+                                minHeight: 32,
+                                borderRadius: 1,
+                            }}
+                        >
+                            {btn.label}
+                        </Button>
+                    ))}
 
-            {/* Search */}
-            <Box sx={{ mb: 3 }}>
-                <TextField
-                    placeholder={`Search ${title.toLowerCase()}...`}
-                    value={search}
-                    onChange={(e) => { setSearch(e.target.value); setPage(0); }}
-                    size="small"
-                    sx={{ width: 320 }}
-                    slotProps={{
-                        input: {
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon sx={{ color: "#9b9b9b" }} />
-                                </InputAdornment>
-                            ),
-                        },
-                    }}
-                />
+                    {/* Filter / Search fields in the same row */}
+                    {filterColumns.map((filter) => {
+                        const isUpdateBtn = filter.key === "updateButton" || filter.key === "update";
+                        if (isUpdateBtn) {
+                            return (
+                                <Button
+                                    key={filter.key}
+                                    variant="contained"
+                                    size="small"
+                                    onClick={handleSearchSubmit}
+                                    sx={{
+                                        backgroundColor: "#9C0752",
+                                        "&:hover": { backgroundColor: "#7a0541" },
+                                        textTransform: "none",
+                                        fontWeight: 600,
+                                        fontSize: "0.8rem",
+                                        px: 2,
+                                        py: 0.25,
+                                        minHeight: 32,
+                                        borderRadius: 1,
+                                    }}
+                                >
+                                    {filter.label}
+                                </Button>
+                            );
+                        }
+                        return (
+                            <TextField
+                                key={filter.key}
+                                placeholder={filter.key === "search" ? `Search ${title.toLowerCase()}...` : filter.label}
+                                value={searchValues[filter.key] ?? ""}
+                                onChange={(e) => setSearchValues(prev => ({ ...prev, [filter.key]: e.target.value }))}
+                                onKeyDown={(e) => { if (e.key === "Enter") handleSearchSubmit(); }}
+                                size="small"
+                                sx={{ width: filter.key === "search" ? 220 : 160 }}
+                                slotProps={{
+                                    input: {
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon sx={{ color: "#9b9b9b", fontSize: 18 }} />
+                                            </InputAdornment>
+                                        ),
+                                    },
+                                }}
+                            />
+                        );
+                    })}
+                    {/* Filter searchbar Submit button */}
+                    {filterColumns.length > 0 && 
+                        <Button
+                            variant="contained"
+                            size="small"
+                            onClick={handleSearchSubmit}
+                            sx={{
+                                backgroundColor: "#9C0752",
+                                "&:hover": { backgroundColor: "#7a0541" },
+                                textTransform: "none",
+                                fontWeight: 600,
+                                fontSize: "0.8rem",
+                                px: 2,
+                                py: 0.25,
+                                minHeight: 32,
+                                borderRadius: 1,
+                            }}
+                        >
+                            Submit
+                        </Button>
+                    }
+                </Box>
             </Box>
 
             {/* Table */}
@@ -182,9 +240,7 @@ export function ManagementPageLayout({
                                         sx={{ py: 8, color: "#9ca3af" }}
                                     >
                                         <Typography variant="body1">
-                                            {search
-                                                ? "No results found."
-                                                : `No ${title.toLowerCase()} yet. Click "Add" to create one.`}
+                                            No {title.toLowerCase()} found.
                                         </Typography>
                                     </TableCell>
                                 </TableRow>
@@ -241,7 +297,7 @@ export function ManagementPageLayout({
             </Paper>
 
             {/* Add Dialog */}
-            <Dialog open={addDialogOpen} onClose={() => setAddDialogOpen(false)} maxWidth="sm" fullWidth>
+            {/* <Dialog open={addDialogOpen} onClose={() => setAddDialogOpen(false)} maxWidth="sm" fullWidth>
                 <DialogTitle sx={{ fontWeight: 700, color: "#1a1a1a" }}>
                     {addButtonLabel ?? `Add ${title.replace(/s$/, "")}`}
                 </DialogTitle>
@@ -264,10 +320,10 @@ export function ManagementPageLayout({
                         Save
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
 
             {/* Delete Confirm Dialog */}
-            <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)} maxWidth="xs" fullWidth>
+            {/* <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)} maxWidth="xs" fullWidth>
                 <DialogTitle sx={{ fontWeight: 700 }}>Confirm Delete</DialogTitle>
                 <DialogContent>
                     <Typography>Are you sure you want to delete this item? This action cannot be undone.</Typography>
@@ -284,7 +340,7 @@ export function ManagementPageLayout({
                         Delete
                     </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
         </Box>
     );
 }
