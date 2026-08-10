@@ -17,16 +17,58 @@ export function Navbar() {
     const [configurationsEl, setConfigurationsEl] = useState<null | HTMLElement>(null);
     const [recordsEl, setRecordsEl] = useState<null | HTMLElement>(null);
 
-  // handle logout function
-   const handleLogout = async () => {
-    try {
-      toast.success("Logged out successfully!");
-      router.push("/login");
-    } catch (error) {
-      console.error("Logout failed:", error);
-      toast.error("Failed to logout");
-    }
-  };
+    const handleLogout = async () => {
+        try {
+            toast.success("Logged out successfully!");
+            router.push("/login");
+        } catch (error) {
+            console.error("Logout failed:", error);
+            toast.error("Failed to logout");
+        }
+    };
+
+    const manageContentItems = [
+        { label: 'Locations', slug: 'locations' },
+        { label: 'Flavors', slug: 'flavors' },
+        { label: 'Purees', slug: 'purees' },
+        { label: 'Sauces', slug: 'sauces' },
+        { label: 'Promotions', slug: 'promotions' },
+        { label: 'Community Instagram Photos', slug: 'community-instagram' },
+        { label: 'IFYD Instagram Photos', slug: 'ifyd-instagram' },
+        { label: 'News', slug: 'news' },
+        { label: 'Blogs', slug: 'blogs' },
+        { label: 'Careers', slug: 'careers' },
+        { label: 'FAQs', slug: 'faqs' },
+        { label: 'Pages', slug: 'pages' },
+        { label: 'CDN Files', slug: 'cdn-files' },
+        { label: 'Mobile Tiles', slug: 'mobile-tiles' },
+        { label: 'Fundraisers', slug: 'fundraisers' },
+    ];
+
+    const rewardsItems = [
+        { label: 'RecoverPoints Requests', slug: 'recover-points' },
+        { label: 'Platinum Upgrades', slug: 'platinum-upgrades' },
+    ];
+
+    const configurationsItems = [
+        { label: 'Key Ingredient', slug: 'key-ingredient' },
+        { label: 'Flavor Attributes', slug: 'flavor-attributes' },
+        { label: 'Departments', slug: 'departments' },
+        { label: 'New Tags', slug: 'new-tags' },
+        { label: 'Blog Tags', slug: 'blog-tags' },
+        { label: 'Contact for Subject', slug: 'contact-subjects' },
+        { label: 'Home Page Badges', slug: 'home-page-badges' },
+        { label: 'Guest Prompt', slug: 'guest-prompt' },
+        { label: 'Location Promo URL', slug: 'location-promo-url' },
+        { label: 'Scheduled Location Text', slug: 'scheduled-location-text' },
+    ];
+
+    const recordsItems = [
+        { label: 'Contact', slug: 'contact' },
+        { label: 'Froyo Games Response', slug: 'froyo-games-response' },
+        { label: 'Froyo Games Winners', slug: 'froyo-games-winners' },
+        { label: 'Flavors Logs', slug: 'flavors-logs' }
+    ];
 
     return (
         <nav className="border-b border-zinc-200 light:border-zinc-800">
@@ -56,21 +98,17 @@ export function Navbar() {
                         onClose={() => setManageContentEl(null)}
                         slotProps={{ list: { 'aria-labelledby': 'manage-content-btn' } }}
                     >
-                        <MenuItem onClick={() => setManageContentEl(null)}>Locations</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Flavors</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Purees</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Sauces</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Promotions</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Community Instagram Photos</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>IFYD Instagram Photos</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>News</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Blogs</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Careers</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>FAQs</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Pages</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>CDN Files</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Mobile Tiles</MenuItem>
-                        <MenuItem onClick={() => setManageContentEl(null)}>Fundraisers</MenuItem>
+                        {manageContentItems.map(({ label, slug }) => (
+                            <MenuItem
+                                key={slug}
+                                onClick={() => {
+                                    setManageContentEl(null);
+                                    router.push(`/manage-content/${slug}`);
+                                }}
+                            >
+                                {label}
+                            </MenuItem>
+                        ))}
                     </Menu>
 
                     {/* Real Rewards Transactions */}
@@ -91,8 +129,17 @@ export function Navbar() {
                         onClose={() => setRewardsEl(null)}
                         slotProps={{ list: { 'aria-labelledby': 'rewards-btn' } }}
                     >
-                        <MenuItem onClick={() => setRewardsEl(null)}>RecoverPoints Requests</MenuItem>
-                        <MenuItem onClick={() => setRewardsEl(null)}>Platinum Upgrades</MenuItem>
+                        {rewardsItems.map(({ label, slug }) => (
+                            <MenuItem
+                                key={slug}
+                                onClick={() => {
+                                    setRewardsEl(null);
+                                    router.push(`/transactions/${slug}`);
+                                }}
+                            >
+                                {label}
+                            </MenuItem>
+                        ))}
                     </Menu>
 
                     {/* Configurations */}
@@ -113,16 +160,17 @@ export function Navbar() {
                         onClose={() => setConfigurationsEl(null)}
                         slotProps={{ list: { 'aria-labelledby': 'configurations-btn' } }}
                     >
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Key Ingredient</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Flavor Attributes</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Departments</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>New Tags</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Blog Tags</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Contact for Subject</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Home Page Badges</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Guest Prompt</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Location Promo URL</MenuItem>
-                        <MenuItem onClick={() => setConfigurationsEl(null)}>Scheduled Location Text</MenuItem>
+                        {configurationsItems.map(({ label, slug }) => (
+                            <MenuItem
+                                key={slug}
+                                onClick={() => {
+                                    setConfigurationsEl(null);
+                                    router.push(`/configurations/${slug}`);
+                                }}
+                            >
+                                {label}
+                            </MenuItem>
+                        ))}
                     </Menu>
 
                     {/* Records */}
@@ -143,17 +191,24 @@ export function Navbar() {
                         onClose={() => setRecordsEl(null)}
                         slotProps={{ list: { 'aria-labelledby': 'records-btn' } }}
                     >
-                        <MenuItem onClick={() => setRecordsEl(null)}>Contact</MenuItem>
-                        <MenuItem onClick={() => setRecordsEl(null)}>Froyo Games Response</MenuItem>
-                        <MenuItem onClick={() => setRecordsEl(null)}>Froyo Games Winners</MenuItem>
-                        <MenuItem onClick={() => setRecordsEl(null)}>Flavors Logs</MenuItem>
-                        <MenuItem onClick={() => setRecordsEl(null)}>Admin Users</MenuItem>
+                        {recordsItems.map(({ label, slug }) => (
+                            <MenuItem
+                                key={slug}
+                                onClick={() => {
+                                    setRecordsEl(null);
+                                    router.push(`/records/${slug}`);
+                                }}
+                            >
+                                {label}
+                            </MenuItem>
+                        ))}
                     </Menu>
 
                     {/* Admin Users */}
                     <Button
                         variant="text"
                         id="id-admin-users"
+                        onClick={() => router.push('/admin-users')}
                         sx={{ color: '#9C0752', textTransform: 'none', fontSize: '1rem' }}
                     >
                         Admin Users
