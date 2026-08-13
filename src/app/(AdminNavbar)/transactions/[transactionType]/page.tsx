@@ -45,7 +45,7 @@ const transactionConfig: Record<string, TransactionConfig> = {
         description: "Manage Real Rewards platinum upgrade requests.",
         addButtonLabel: "Add Upgrade",
         headerColumns: [
-            { key: "uploadNewBatch", label: "Upload New Batch" },
+            { key: "uploadNewBatch", label: "Upload New Batch" , href: "/transactions/platinum-upgrades/uploadNewbatch"},
         ],
         columns: [
             { key: "date", label: "Date" },

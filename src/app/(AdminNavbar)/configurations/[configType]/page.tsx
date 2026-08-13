@@ -10,7 +10,10 @@ const configMap: Record<string, ConfigPageConfig> = {
         title: "Key Ingredients",
         description: "Manage key ingredients used in yogurt flavors.",
         addButtonLabel: "Add Ingredient",
-        headerColumns: [{ key: "create", label: "Create" }, { key: "archived-ingredients", label: "Archived Ingredients" }],
+        headerColumns: [
+            { key: "create", label: "Create", href: "/configurations/key-ingredient/create" },
+            { key: "archived-ingredients", label: "Archived Ingredients", href: "/configurations/key-ingredient/archived-ingredients" },
+        ],
         filterColumns: [
             { key: "search", label: "Search" },
         ],
@@ -23,7 +26,10 @@ const configMap: Record<string, ConfigPageConfig> = {
         title: "Flavor Attributes",
         description: "Manage attributes associated with flavors.",
         addButtonLabel: "Add Attribute",
-        headerColumns: [{ key: "create", label: "Create" }, { key: "archived-attributes", label: "Archived Attributes" }],
+        headerColumns: [
+            { key: "create", label: "Create", href: "/configurations/flavor-attributes/create" },
+            { key: "archived-attributes", label: "Archived Attributes", href: "/configurations/flavor-attributes/archived-attributes" },
+        ],
         filterColumns: [
             { key: "search", label: "Search" },
         ],
@@ -37,8 +43,8 @@ const configMap: Record<string, ConfigPageConfig> = {
         description: "Manage company departments.",
         addButtonLabel: "Add Department",
         headerColumns: [
-            { key: "create", label: "Create" },
-            { key: "archived-departments", label: "Archived Departments" }
+            { key: "create", label: "Create", href: "/configurations/departments/create" },
+            { key: "archived-departments", label: "Archived Departments", href: "/configurations/departments/archived-departments" },
         ],
         filterColumns: [
             { key: "search", label: "Search" },
@@ -53,7 +59,7 @@ const configMap: Record<string, ConfigPageConfig> = {
         description: "Manage tags for new items.",
         addButtonLabel: "Add Tag",
         headerColumns: [
-            { key: "create", label: "Create" },
+            { key: "create", label: "Create", href: "/configurations/new-tags/create" },
         ],
         columns: [
             { key: "name", label: "Name" },
@@ -64,8 +70,8 @@ const configMap: Record<string, ConfigPageConfig> = {
         title: "Blog Tags",
         description: "Manage tags used for blog categorization.",
         addButtonLabel: "Add Tag",
-          headerColumns: [
-            { key: "create", label: "Create" },
+        headerColumns: [
+            { key: "create", label: "Create", href: "/configurations/blog-tags/create" },
         ],
         columns: [
             { key: "name", label: "Name" },
@@ -77,8 +83,8 @@ const configMap: Record<string, ConfigPageConfig> = {
         description: "Manage contact form subject categories.",
         addButtonLabel: "Add Subject",
         headerColumns: [
-            { key: "create", label: "Create" },
-            { key: "archived-subjects", label: "Archived Subjects" }
+            { key: "create", label: "Create", href: "/configurations/contact-subjects/create" },
+            { key: "archived-subjects", label: "Archived Subjects", href: "/configurations/contact-subjects/archived-subjects" },
         ],
         filterColumns: [
             { key: "search", label: "Search" },
@@ -93,7 +99,7 @@ const configMap: Record<string, ConfigPageConfig> = {
         description: "Manage badges displayed on the home page.",
         addButtonLabel: "Add Badge",
         headerColumns: [
-            { key: "create", label: "Create" },
+            { key: "create", label: "Create", href: "/configurations/home-page-badges/create" },
         ],
         columns: [
             { key: "name", label: "Name" },
