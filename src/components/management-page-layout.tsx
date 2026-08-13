@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ManagementPageLayoutProps } from "../types/management-page";
 import {
     Box,
@@ -47,6 +48,7 @@ export function ManagementPageLayout({
     onDelete,
     showActions = true,
 }: ManagementPageLayoutProps) {
+    const router = useRouter();
     const [searchValues, setSearchValues] = useState<Record<string, string>>({});
     const [submittedSearch, setSubmittedSearch] = useState<Record<string, string>>({});
     const [page, setPage] = useState(0);
@@ -95,7 +97,7 @@ export function ManagementPageLayout({
                         <Button
                             key={btn.key}
                             variant={"outlined"}
-                            // onClick={}
+                            onClick={() => btn.href && router.push(btn.href)}
                             size="small"
                             sx={{
                                 backgroundColor: "transparent",

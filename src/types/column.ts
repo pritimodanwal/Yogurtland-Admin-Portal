@@ -8,4 +8,5 @@ export interface Column {
     label: string;
     width?: string | number;
     options?: DropdownOption[];
+    href?: string;
 }

@@ -12,10 +12,10 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage all Yogurtland store locations.",
         addButtonLabel: "Add Location",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-locations', label: "Archived Locations" }, 
-            { key: 'moderate-images', label: "Moderate Images" },
-            { key: 'export', label: "Export" }
+            { key: 'create', label: "Create", href: '/manage-content/locations/create' }, 
+            { key: 'archived-locations', label: "Archived Locations", href: '/manage-content/locations/archived-locations' }, 
+            { key: 'moderate-images', label: "Moderate Images", href: '/manage-content/locations/moderate-images' },
+            { key: 'export', label: "Export", href: '#' }
         ],
         filterColumns: [
             { key: 'search', label: "Search" }, 
@@ -33,10 +33,10 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage all yogurt flavors.",
         addButtonLabel: "Add Flavor",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-flavors', label: "Archived Flavors" }, 
-            { key: 'export', label: "Export" },
-            { key: 'change-log', label: "Change Log" },
+            { key: 'create', label: "Create", href: '/manage-content/flavors/create' }, 
+            { key: 'archived-flavors', label: "Archived Flavors", href: '/manage-content/flavors/archived-flavors' }, 
+            { key: 'export', label: "Export", href: '#' },
+            { key: 'change-log', label: "Change Log", href: '/manage-content/flavors/change-log' },
         ],
         filterColumns: [
             { key: 'searchByNameID', label: "Search By Name/ID" }, 
@@ -54,7 +54,7 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage all puree toppings.",
         addButtonLabel: "Add Puree",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
+            { key: 'create', label: "Create", href: '/manage-content/purees/create' }, 
         ],
         columns: [
             { key: "name", label: "Name" },
@@ -66,7 +66,7 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage all sauce toppings.",
         addButtonLabel: "Add Sauce",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
+            { key: 'create', label: "Create", href: '/manage-content/sauces/create' }, 
         ],
         columns: [
             { key: "name", label: "Name" },
@@ -78,8 +78,8 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage active and upcoming promotions.",
         addButtonLabel: "Add Promotion",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-promotions', label: "Archived Promotions" }, 
+            { key: 'create', label: "Create", href: '/manage-content/promotions/create' }, 
+            { key: 'archived-promotions', label: "Archived Promotions", href: '/manage-content/promotions/archived-promotions' }, 
         ],
         filterColumns: [
             { key: 'search', label: "Search" }, 
@@ -96,7 +96,7 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage user-submitted community Instagram photos.",
         addButtonLabel: "Add Photo",
         headerColumns: [
-            { key: 'corporate-act', label: "Add From Corporate Act" }, 
+            { key: 'corporate-act', label: "Add From Corporate Act", href: '/manage-content/community-instagram/corporate-act' }, 
         ],
         columns: [
             { key: "image", label: "Image" },
@@ -111,7 +111,7 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage IFYD (I Froyo Your Day) Instagram photos.",
         addButtonLabel: "Add Photo",
         headerColumns: [
-            { key: 'addFromUrl', label: "Add From URL" }, 
+            { key: 'addFromUrl', label: "Add From URL", href: '/manage-content/ifyd-instagram/addFromUrl' }, 
         ],
         columns: [
             { key: "image", label: "Image" },
@@ -126,8 +126,8 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage news articles and announcements.",
         addButtonLabel: "Add News",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-post', label: "Archived News Posts" }, 
+            { key: 'create', label: "Create", href: '/manage-content/news/create' }, 
+            { key: 'archived-post', label: "Archived News Posts", href: '/manage-content/news/archived-post' }, 
         ],
         filterColumns: [
             { key: 'search', label: "Search" }, 
@@ -142,8 +142,8 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage blog posts.",
         addButtonLabel: "Add Blog",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-blog', label: "Archived Blog Posts" }, 
+            { key: 'create', label: "Create", href: '/manage-content/blogs/create' }, 
+            { key: 'archived-blog', label: "Archived Blog Posts", href: '/manage-content/blogs/archived-blog' }, 
         ],
         filterColumns: [
             { key: 'search', label: "Search" }, 
@@ -158,9 +158,9 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage job listings and career opportunities.",
         addButtonLabel: "Add Job",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-career', label: "Archived Careers" }, 
-            { key: 'templates', label: "Templates" }, 
+            { key: 'create', label: "Create", href: '/manage-content/careers/create' }, 
+            { key: 'archived-career', label: "Archived Careers", href: '/manage-content/careers/archived-career' }, 
+            { key: 'templates', label: "Templates", href: '/manage-content/careers/templates' }, 
         ],
         filterColumns: [
             { key: 'search', label: "Search" }, 
@@ -178,8 +178,8 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage frequently asked questions.",
         addButtonLabel: "Add FAQ",
          headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-faqs', label: "Archived FAQs" }, 
+            { key: 'create', label: "Create", href: '/manage-content/faqs/create' }, 
+            { key: 'archived-faqs', label: "Archived FAQs", href: '/manage-content/faqs/archived-faqs' }, 
         ],
         columns: [
             { key: "question", label: "Question" },
@@ -191,8 +191,8 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage static content pages.",
         addButtonLabel: "Add Page",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
-            { key: 'archived-pages', label: "Archived Pages" }, 
+            { key: 'create', label: "Create", href: '/manage-content/pages/create' }, 
+            { key: 'archived-pages', label: "Archived Pages", href: '/manage-content/pages/archived-pages' }, 
         ],
         filterColumns: [
             { key: 'search', label: "Search" }, 
@@ -224,7 +224,7 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage mobile app home screen tiles.",
         addButtonLabel: "Add Tile",
         headerColumns: [
-            { key: 'create', label: "Create" }, 
+            { key: 'create', label: "Create", href: '/manage-content/mobile-tiles/create' }, 
         ],
         columns: [
             { key: "name", label: "Name" },
@@ -242,7 +242,7 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage fundraiser campaigns.",
         addButtonLabel: "Add Fundraiser",
         headerColumns: [
-            { key: 'massBlockdates', label: "Mass Block Dates" }, 
+            { key: 'massBlockdates', label: "Mass Block Dates", href: '/manage-content/fundraisers/massBlockdates' }, 
         ],
         filterColumns: [    
             { key: 'startDate', label: "Start" }, 
