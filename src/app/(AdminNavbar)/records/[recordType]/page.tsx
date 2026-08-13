@@ -13,7 +13,7 @@ const recordsMap: Record<string, RecordConfig> = {
         addButtonLabel: "Export",
         showActions: false,
         headerColumns:[
-            { key: 'archivedContactMessage', label: "Archived Contact Messages" },
+            { key: 'archivedContactMessage', label: "Archived Contact Messages", href: '/records/contact/archivedContactMessage' },
         ],
         filterColumns:[ 
             { key: 'showArchived', label: "Show Archived" },
