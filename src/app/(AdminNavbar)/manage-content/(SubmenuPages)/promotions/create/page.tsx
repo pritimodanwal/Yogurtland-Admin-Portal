@@ -14,6 +14,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import RichTextEditorField from "../../_components/RichTextEditorField";
 
 const FIELD_LABEL_WIDTH = 220;
 
@@ -179,14 +180,7 @@ export default function CreatePromotionPage() {
             </FieldRow>
 
             <FieldRow label="Body Text">
-                <TextField
-                    fullWidth
-                    multiline
-                    minRows={10}
-                    placeholder="Body Text"
-                    value={bodyText}
-                    onChange={(e) => setBodyText(e.target.value)}
-                />
+                <RichTextEditorField value={bodyText} onChange={setBodyText} minRows={10} />
             </FieldRow>
 
             <FieldRow label="LandingPageImage">

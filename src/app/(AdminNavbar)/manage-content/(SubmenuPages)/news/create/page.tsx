@@ -13,6 +13,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import RichTextEditorField from "../../_components/RichTextEditorField";
 
 const FIELD_LABEL_WIDTH = 220;
 
@@ -328,14 +329,7 @@ export default function CreateNewsPage() {
             </FieldRow>
 
             <FieldRow label="Body Text">
-                <TextField
-                    fullWidth
-                    multiline
-                    minRows={10}
-                    placeholder="Body Text"
-                    value={bodyText}
-                    onChange={(e) => setBodyText(e.target.value)}
-                />
+                <RichTextEditorField value={bodyText} onChange={setBodyText} minRows={10} />
             </FieldRow>
 
             <Box sx={{ ml: `${FIELD_LABEL_WIDTH + 24}px`, mt: 2 }}>
