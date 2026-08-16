@@ -96,7 +96,7 @@ const contentConfig: Record<string, ManageContent> = {
         description: "Manage user-submitted community Instagram photos.",
         addButtonLabel: "Add Photo",
         headerColumns: [
-            { key: 'corporate-act', label: "Add From Corporate Act", href: '/manage-content/community-instagram/corporate-act' }, 
+            { key: 'corporate-act', label: "Add From Corporate Act", href: '#' }, 
         ],
         columns: [
             { key: "image", label: "Image" },
