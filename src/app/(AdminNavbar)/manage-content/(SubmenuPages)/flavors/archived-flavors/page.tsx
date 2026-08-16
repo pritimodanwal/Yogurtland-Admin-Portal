@@ -21,19 +21,7 @@ interface ArchivedFlavor {
 
 const ARCHIVED_FLAVORS: ArchivedFlavor[] = [
     { name: "A Test Flavor" },
-    { name: "Acai" },
-    { name: "Acai" },
-    { name: "Amaretto Cookies" },
-    { name: "Apple Strudel with Caramel" },
-    { name: "Apricot Mango Tart" },
-    { name: "Apricot Tart" },
-    { name: "Arctic Vanilla" },
-    { name: "Banana Nut Bread" },
-    { name: "Black Currant Berry Tart" },
-    { name: "Blue Raspberry Sorbet flavored with Jolly Rancher\u00c2\u00ae" },
-    { name: "Blueberry Avalanche Tart" },
-    { name: "Boysenberry NSA" },
-];
+]
 
 export default function ArchivedFlavorsPage() {
     const router = useRouter();
