@@ -12,7 +12,7 @@ import {
     Typography,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import RichTextEditorField from "../../_components/RichTextEditorField";
+import RichTextEditorField from "../../../../../../components/RichTextEditorField";
 
 const FIELD_LABEL_WIDTH = 220;
 
