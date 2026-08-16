@@ -174,7 +174,7 @@ export default function CreateLocationPage() {
                 {/* <Box sx={{ px: 3, py: 2, borderBottom: "1px solid #e5e7eb", backgroundColor: "#f9fafb" }}>
                     <Typography sx={{ fontWeight: 500, color: "#6b7280" }}>Locations</Typography>
                 </Box> */}
-<>
+                <>
                 <Box sx={{ p: 4 }}>
                     <FieldRow label="Status">
                         <TextField select fullWidth size="small" value={status} onChange={(e) => setStatus(e.target.value)}>
