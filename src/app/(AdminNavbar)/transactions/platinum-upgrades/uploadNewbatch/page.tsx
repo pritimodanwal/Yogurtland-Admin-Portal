@@ -78,18 +78,13 @@ export default function PlatinumUpgradeUploadNewBatchPage() {
                     justifyContent: "space-between",
                     alignItems: "center",
                     mb: 3,
-                    border: "1px solid #e0e0e0",
-                    borderRadius: 1,
-                    px: 2.5,
-                    py: 1.5,
-                    boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
                 }}
             >
                 <Typography
                     sx={{
-                        fontSize: "24px",
-                        fontWeight: 500,
-                        color: "#555",
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        color: "#1a1a1a",
                     }}
                 >
                     Platinum Upgrade Batch
