@@ -55,30 +55,30 @@ const configMap: Record<string, ConfigPageConfig> = {
             { key: "actions", label: "" }
         ],
     },
-    "new-tags": {
-        title: "New Tags",
-        description: "Manage tags for new items.",
-        addButtonLabel: "Add Tag",
-        headerColumns: [
-            { key: "create", label: "Create", href: "/configurations/new-tags/create" },
-        ],
-        columns: [
-            { key: "name", label: "Name" },
-            { key: "actions", label: "" }
-        ],
-    },
-    "blog-tags": {
-        title: "Blog Tags",
-        description: "Manage tags used for blog categorization.",
-        addButtonLabel: "Add Tag",
-        headerColumns: [
-            { key: "create", label: "Create", href: "/configurations/blog-tags/create" },
-        ],
-        columns: [
-            { key: "name", label: "Name" },
-            { key: "actions", label: "" }
-        ],
-    },
+    // "new-tags": {
+    //     title: "New Tags",
+    //     description: "Manage tags for new items.",
+    //     addButtonLabel: "Add Tag",
+    //     headerColumns: [
+    //         { key: "create", label: "Create", href: "/configurations/new-tags/create" },
+    //     ],
+    //     columns: [
+    //         { key: "name", label: "Name" },
+    //         { key: "actions", label: "" }
+    //     ],
+    // },
+    // "blog-tags": {
+    //     title: "Blog Tags",
+    //     description: "Manage tags used for blog categorization.",
+    //     addButtonLabel: "Add Tag",
+    //     headerColumns: [
+    //         { key: "create", label: "Create", href: "/configurations/blog-tags/create" },
+    //     ],
+    //     columns: [
+    //         { key: "name", label: "Name" },
+    //         { key: "actions", label: "" }
+    //     ],
+    // },
     "contact-subjects": {
         title: "Contact For Subjects",
         description: "Manage contact form subject categories.",
