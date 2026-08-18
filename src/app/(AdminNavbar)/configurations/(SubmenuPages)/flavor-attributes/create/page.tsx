@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Box, Button, Checkbox, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, MenuItem, Select, TextField, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const FIELD_LABEL_WIDTH = 200;
