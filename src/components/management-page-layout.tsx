@@ -35,17 +35,12 @@ import { toast } from "sonner";
 
 export function ManagementPageLayout({
     title,
-    description,
     columns,
     filterColumns = [],
     headerColumns = [],
     newFieldColumns = [],
     rows = [],
-    addButtonLabel,
-    addDialogContent,
-    onAdd,
     onEdit,
-    onDelete,
     showActions = true,
 }: ManagementPageLayoutProps) {
     const router = useRouter();
