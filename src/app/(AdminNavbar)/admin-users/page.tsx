@@ -8,7 +8,7 @@ export default function AdminUsersPage() {
             title="Admin Users"
             description="Manage admin user accounts and permissions."
             addButtonLabel="Add Admin User"
-            headerColumns={[{ key: "create", label: "Create" }]}
+            headerColumns={[{ key: "create", label: "Create", href: "/admin-users/create" }]}
             filterColumns={[{ 
                 key: 'dropDown', label: 'Filter By Type', options: [
                     { value: 'admin', label: 'Admin' },
