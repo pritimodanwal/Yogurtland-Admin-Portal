@@ -1,6 +1,7 @@
 'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
 import {
@@ -75,7 +76,9 @@ export function Navbar() {
             <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
                 {/* Logo - Left */}
                 <h1 className="text-2xl font-bold text-white">
-                    <Image src='/logo.png' alt="Logo" width={100} height={100} style={{ height: 'auto', width: 'auto' }} />
+                    <Link href="/" aria-label="Go to home page" className="inline-block">
+                        <Image src='/logo-yogurtland.png' alt="Logo" width={100} height={100} style={{ height: 'auto', width: 'auto' }} />
+                    </Link>
                 </h1>
 
                 {/* Navigation - Center */}
